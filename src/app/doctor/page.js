@@ -1,6 +1,6 @@
 // pages/doctor.js
 import React from 'react';
-import styles from '../styles/main.module.css';
+import styles from '../styles/DoctorMain.module.css';
 
 export default function Doctor() {
   return (

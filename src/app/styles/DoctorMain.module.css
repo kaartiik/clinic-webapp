@@ -7,16 +7,4 @@
   background-image: url("../../../public/bg2.jpg");
   background-size: cover;
 }
-
-.table {
-   width: 100%;
-   border-collapse: collapse;
- }
- 
- .table th,
- .table td {
-   padding: 8px;
-   text-align: left;
-   border-bottom: 1px solid #ddd;
- }
  

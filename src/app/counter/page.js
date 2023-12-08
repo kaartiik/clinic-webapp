@@ -5,7 +5,7 @@ import styles from '../styles/CounterMain.module.css';
 
 export default function Counter() {
   return (
-    <div className={globalStyles.container}>
+    <div className={styles.container}>
       <h1>This is the Counter page</h1>
       <table className={styles.table}>
         <thead>
