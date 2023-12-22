@@ -8,9 +8,14 @@
   background-size: cover;
 }
 
+.title {
+  color: black;
+}
+
 .table {
    width: 100%;
    border-collapse: collapse;
+   color: black;
  }
  
  .table th,

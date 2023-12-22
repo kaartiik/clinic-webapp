@@ -2,12 +2,14 @@
 "use client";
 import React, {useEffect, useState} from 'react';
 import globalStyles from '../styles/main.module.css';
+import QRCode from "react-qr-code";
 import styles from '../styles/CounterMain.module.css';
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import firebase from "../firebase";
 
   export default function Counter() {
     const [appointments, setAppointments] = useState([]);
+    const [clinics, setClinics] = useState([]);
 
     function displayFirestoreTimestamp(firestoreTimestamp) {
       // Convert Firestore Timestamp to JavaScript Date object
@@ -28,6 +30,7 @@ import firebase from "../firebase";
           clinicsArray.push({label:doc.data().clinic_name, value:doc.data().clinic_id, openingTime:doc.data().opening_time, closingTime:doc.data().closing_time});
         });
 
+      setClinics(clinicsArray);
       const appointmentSnapshot = await getDocs(collection(firebase.db, "clinics", clinicsArray[0].value, "appointments"));
 
       appointmentSnapshot.forEach((doc) => {
@@ -47,7 +50,16 @@ import firebase from "../firebase";
 
   return (
     <div className={styles.container}>
-      <h1>This is the Counter page</h1>
+      {clinics.length >  0 &&
+        <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
+            <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={clinics[0].value}
+            />
+        </div>
+      }
+      <h1 className={styles.title}>Counter</h1>
       <table className={styles.table}>
         <thead>
           <tr>
