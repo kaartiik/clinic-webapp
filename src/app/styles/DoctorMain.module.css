@@ -6,5 +6,10 @@
   height: 100vh; /* Use viewport height to take full height of the screen */
   background-image: url("../../../public/bg2.jpg");
   background-size: cover;
+  color: black;
+}
+
+.scannerContainer {
+  padding: 10;
 }
  
