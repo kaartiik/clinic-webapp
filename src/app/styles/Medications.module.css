@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Use viewport height to take full height of the screen */
+  background-image: url("../../../public/bg2.jpg");
+  background-size: cover;
+}
+
+.listview {
+  padding: 25px;
+  border-radius: 25px;
+  border: 1px solid gray;
+  margin: 15px;
+  background-color: white;
+  max-height: 40%;
+  overflow-y: scroll;
+  height: 40%;
+  width: 40%;
+}
+
+.listviewitem {
+  background-color: #39B68D;
+  padding: 10px;
+  border-radius: 25px;
+  list-style-type: none;
+  margin: 10px;
+  text-align: center;
+}
+
+.textinput {
+  padding: 20px;
+  border-radius: 25px;
+}
+ 

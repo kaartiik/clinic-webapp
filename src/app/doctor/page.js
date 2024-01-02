@@ -9,12 +9,17 @@ import {QrScanner} from '@yudiel/react-qr-scanner';
 export default function Doctor() {
   const router = useRouter();
   const [openScanner, setOpenScanner] = useState(false);
-  const [patientData, setPatientData] = useState();
 
   const onScan = (result) => {
     setOpenScanner(!openScanner);
+    // Split the string into an array using the comma as a separator
+    const dataArray = result.split(',');
 
-    router.push(`/patient?id=${result}`);
+    // Assign the substrings to respective variables
+    const patient_id = dataArray[0];
+    const appointment_id = dataArray[1];
+
+    router.push(`/patient?patientID=${patient_id}&appointmentID=${appointment_id}`);
   }
 
   return (
