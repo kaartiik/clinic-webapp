@@ -6,12 +6,14 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import globalStyles from '../styles/main.module.css';
 import styles from '../styles/Medications.module.css';
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { doc, setDoc, addDoc, collection, updateDoc } from "firebase/firestore";
 import firebase from "../firebase";
 import CLINIC_ID from '../clinic';
 import Header from '@/utility/header';
 
-export default function Medication({patientID, appointmentID}) {
+export default function Medication({searchParams}) {
+  const {patientID, appointmentID} = searchParams;
+
   const router = useRouter();
 
   const [medications, setMedications] = useState([]);
@@ -34,11 +36,19 @@ export default function Medication({patientID, appointmentID}) {
     }
 
     try {
+      console.log('here');
+      console.log(CLINIC_ID, patientID, appointmentID);
+
       const clinicAppointmentRef = doc(firebase.db, 'clinics', CLINIC_ID, 'appointments', appointmentID);
       const patientAppointmentRef = doc(firebase.db, 'users', patientID, 'appointments', appointmentID);
 
       const updateAppointmentMedicalInfoClinic = await updateDoc(clinicAppointmentRef, data);
       const updateAppointmentMedicalInfoPatient = await updateDoc(patientAppointmentRef, data);
+
+      console.log(updateAppointmentMedicalInfoClinic);
+      console.log(updateAppointmentMedicalInfoPatient);
+
+
 
       setMedications([]);
 

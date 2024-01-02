@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Use viewport height to take full height of the screen */
+  background-image: url("../../../public/bg2.jpg");
+  background-size: cover;
+}
+
+.textinput {
+  padding: 20px;
+  border-radius: 25px;
+  height: 60%;
+  width: 40%;
+}
+ 
