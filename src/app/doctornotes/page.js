@@ -2,13 +2,14 @@
 "use client";
 import React, {useEffect, useState} from 'react';
 import globalStyles from '../styles/main.module.css';
-import Link from 'next/link';
 import QRCode from "react-qr-code";
-import styles from '../styles/CounterMain.module.css';
+import styles from '../styles/DoctorNotes.module.css';
 import { collection, getDocs, Timestamp } from "firebase/firestore";
 import firebase from "../firebase";
 
-  export default function Counter() {
+  export default function DoctorNotes({searchParams}) {
+    const appointment = searchParams;
+    console.log(JSON.stringify(searchParams, null, 2));
     const [appointments, setAppointments] = useState([]);
     const [clinics, setClinics] = useState([]);
 
@@ -45,46 +46,21 @@ import firebase from "../firebase";
   };
 
   useEffect(() =>{
-  fetchData();
+  // fetchData();
   }, [])
 
 
   return (
     <div className={styles.container}>
-      {clinics.length >  0 &&
-        <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
-            <QRCode
-            size={256}
-            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            value={clinics[0].value}
-            />
-        </div>
+      <div className={styles.noteItem}>Patient Name: {appointment.patient_name}</div>
+      <div className={styles.noteItem}>Appointment Date: {appointment.appointment_date}</div>
+      <div className={styles.noteItem}>Medical Info: {appointment.medical_info}</div>
+      <div className={styles.noteItem}>Doctor Notes: {appointment.doctor_notes}</div>
+      <div className={styles.noteItem}>Medications: {appointment.medications.join(", ")}</div>
+
+      {appointment.hasOwnProperty('referral') && 
+        <button className={globalStyles.roundedButton}>Print Referral</button>
       }
-      <h1 className={styles.title}>Counter</h1>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Appointment</th>
-            <th>Appointment Slot</th>
-            <th>Check-In Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map((appointment, index) => (
-            <tr key={index}>
-              <td>
-                <Link href={{pathname: "/doctornotes", query: {...appointment}}} passHref>
-                  {appointment.patient_name}
-                </Link>
-              </td>
-              <td>{"Yes"}</td>
-              <td>{appointment.appointment_time}</td>
-              {/* <td>{appointment.checkInTime}</td> */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }

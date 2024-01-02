@@ -36,7 +36,6 @@ export default function Medication({searchParams}) {
     }
 
     try {
-      console.log('here');
       console.log(CLINIC_ID, patientID, appointmentID);
 
       const clinicAppointmentRef = doc(firebase.db, 'clinics', CLINIC_ID, 'appointments', appointmentID);
@@ -44,11 +43,6 @@ export default function Medication({searchParams}) {
 
       const updateAppointmentMedicalInfoClinic = await updateDoc(clinicAppointmentRef, data);
       const updateAppointmentMedicalInfoPatient = await updateDoc(patientAppointmentRef, data);
-
-      console.log(updateAppointmentMedicalInfoClinic);
-      console.log(updateAppointmentMedicalInfoPatient);
-
-
 
       setMedications([]);
 
