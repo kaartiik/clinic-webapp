@@ -14,7 +14,8 @@
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-qr-code": "^2.0.12"
+    "react-qr-code": "^2.0.12",
+    "react-to-print": "^2.14.15"
   },
   "devDependencies": {
     "eslint": "^8",

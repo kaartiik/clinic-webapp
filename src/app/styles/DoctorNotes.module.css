@@ -12,4 +12,13 @@
 .noteItem {
   margin: 2%;
 }
+
+.referralHide {
+  margin: 2%;
+  display:none
+}
+
+.notesContainer {
+  padding-top: 60px;
+}
  
