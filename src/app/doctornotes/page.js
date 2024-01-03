@@ -2,16 +2,15 @@
 "use client";
 import React, {useEffect, useState,useRef} from 'react';
 import { useReactToPrint } from 'react-to-print';
+import { useRouter } from 'next/navigation';
 import globalStyles from '../styles/main.module.css';
-import QRCode from "react-qr-code";
 import styles from '../styles/DoctorNotes.module.css';
-import { collection, getDocs, Timestamp } from "firebase/firestore";
-import firebase from "../firebase";
 import Header from '@/utility/header';
 
   export default function DoctorNotes({searchParams}) {
     const appointment = searchParams;
     const componentRef = useRef();
+    const router = useRouter();
 
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
@@ -36,6 +35,9 @@ import Header from '@/utility/header';
         {appointment.hasOwnProperty('referral') && 
           <button className={globalStyles.roundedButton} onClick={handlePrint}>Print Referral</button>
         }
+
+          <button className={globalStyles.roundedButton} onClick={() => {router.push("/counter")}}>Complete</button>
+
       </div>
     </div>
   );
