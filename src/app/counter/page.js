@@ -37,15 +37,15 @@ import firebase from "../firebase";
       appointmentSnapshot.forEach((doc) => {
         appointmentsArray.push({
           ...doc.data(), 
-          appointment_time: displayFirestoreTimestamp(doc.data().appointment_date)
+          appointment_time: displayFirestoreTimestamp(doc.data().appointment_date),
+          check_in_time: displayFirestoreTimestamp(doc.data().check_in_time),
         });
       });
-      
       setAppointments(appointmentsArray);
   };
 
   useEffect(() =>{
-  fetchData();
+    fetchData();
   }, [])
 
 
@@ -80,7 +80,7 @@ import firebase from "../firebase";
               </td>
               <td>{"Yes"}</td>
               <td>{appointment.appointment_time}</td>
-              {/* <td>{appointment.checkInTime}</td> */}
+              <td>{appointment.check_in_time}</td>
             </tr>
           ))}
         </tbody>
