@@ -49,13 +49,16 @@ import Header from '@/utility/header';
       setClinics(clinicsArray);
       const appointmentSnapshot = await getDocs(collection(firebase.db, "clinics", clinicsArray[0].value, "appointments"));
 
+      //only display checked in patients
       appointmentSnapshot.forEach((doc) => {
-        appointmentsArray.push({
-          ...doc.data(), 
-          appointment_date: doc.data().appointment_booked ? displayAppointmentDate(doc.data().appointment_date) : doc.data().appointment_date,
-          appointment_time: doc.data().appointment_booked ? displayFirestoreTimestamp(doc.data().appointment_date) : doc.data().appointment_date,
-          check_in_time: displayFirestoreTimestamp(doc.data().check_in_time),
-        });
+        if(doc.data().checked_in === true) {
+          appointmentsArray.push({
+            ...doc.data(), 
+            appointment_date: doc.data().appointment_booked ? displayAppointmentDate(doc.data().appointment_date) : "No Appointment",
+            appointment_time: doc.data().appointment_booked ? displayFirestoreTimestamp(doc.data().appointment_date) : doc.data().appointment_date,
+            check_in_time: doc.data().check_in_time ? displayFirestoreTimestamp(doc.data().check_in_time) : "N/A",
+          });
+      }
       });
       setAppointments(appointmentsArray);
   };
